@@ -14,8 +14,6 @@ module.exports = {
     historyApiFallback: {
       index: "/public/index.html",
     },
-    // hot: true,
-    // open: true,
   },
   module: {
     rules: [
@@ -23,19 +21,8 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-          },
+          loader: "raw-loader",
         },
-      },
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
   },
@@ -46,18 +33,6 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {
         AuthModule: "AuthModule@http://localhost:3002/remoteEntry.js",
-        Second: "Second@http://localhost:3003/remoteEntry.js",
-      },
-      shared: {
-        react: { singleton: true, eager: true },
-        "react-dom": {
-          singleton: true,
-          eager: true,
-        },
-        "react-router-dom": {
-          singleton: true,
-          eager: true,
-        },
       },
     }),
   ],

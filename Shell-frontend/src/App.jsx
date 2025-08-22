@@ -1,8 +1,9 @@
 import React, { Suspense } from "react";
-import "./style.css";
-import Layout from "./components/Layout/Index.jsx";
-import ErrorBoundary from "./components/ErrorBoundary/Index.jsx";
 import { BrowserRouter, Route, Routes } from "react-router";
+import ErrorBoundary from "./components/ErrorBoundary/Index.jsx";
+import Layout from "./components/Layout/Index.jsx";
+import "./style.css";
+// import SecondApplication from "SecondModule/Second";
 
 export default function App() {
   const loadRemoteComponent = (importFunc) => {
@@ -15,16 +16,31 @@ export default function App() {
   };
 
   const AuthApplication = loadRemoteComponent(() => import("AuthModule/Auth"));
+  const SecondApplication = loadRemoteComponent(() => import("Second/Second"));
+
+  // console.log("🚀 Shell-frontend running", SecondApplication);
 
   return (
     <BrowserRouter>
       <Layout>
         <ErrorBoundary>
-          <Suspense fallback={<h2>Loading Service...</h2>}>
-            <Routes>
-              <Route path="/" element={<AuthApplication />} />
-            </Routes>
-          </Suspense>
+          <div className="shell-frontend">
+            <h1>Child services</h1>
+            <Suspense fallback={<h2>Loading Service...</h2>}>
+              <Routes>
+                <Route path="/" element={<AuthApplication />} />
+                <Route path="/second" element={<SecondApplication />} />
+                <Route
+                  path="/third"
+                  element={
+                    <div>
+                      <h1>Third Service</h1>
+                    </div>
+                  }
+                />
+              </Routes>
+            </Suspense>
+          </div>
         </ErrorBoundary>
       </Layout>
     </BrowserRouter>

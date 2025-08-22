@@ -5,8 +5,8 @@ export default function Button({ buttonName }) {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    alert(`Button clicked from First Service`);
-    navigate("/second");
+    alert(`Button clicked from Second Service Service`);
+    navigate("/third");
   };
 
   return (

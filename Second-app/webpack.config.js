@@ -10,12 +10,7 @@ module.exports = {
   mode: "development",
   devServer: {
     static: path.join(__dirname, "dist"),
-    port: 3001,
-    historyApiFallback: {
-      index: "/public/index.html",
-    },
-    // hot: true,
-    // open: true,
+    port: 3003,
   },
   module: {
     rules: [
@@ -30,37 +25,33 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        test: /\.(png|jpg|gif)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]",
+            outputPath: "images/",
+          },
+        },
       },
     ],
   },
   plugins: [
     htmlPlugin,
     new ModuleFederationPlugin({
-      name: "Host",
+      name: "Second",
       filename: "remoteEntry.js",
-      remotes: {
-        AuthModule: "AuthModule@http://localhost:3002/remoteEntry.js",
-        Second: "Second@http://localhost:3003/remoteEntry.js",
+      exposes: {
+        "./Second": "./src/App.jsx",
       },
       shared: {
         react: { singleton: true, eager: true },
-        "react-dom": {
-          singleton: true,
-          eager: true,
-        },
-        "react-router-dom": {
-          singleton: true,
-          eager: true,
-        },
+        "react-dom": { singleton: true, eager: true },
       },
     }),
   ],
 };
-
-// Checkout: "Checkout@http://localhost:3000/remoteEntry.js"

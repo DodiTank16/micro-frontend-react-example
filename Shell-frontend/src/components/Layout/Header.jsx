@@ -1,16 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { use } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
   return (
     <>
       <div className="root-app">
         <div className="topnav">
-          <Link to="/" className="active">
-            Auth Service
+          <Link to="/" className={location.pathname === "/" ? "active" : ""}>
+            First Service
           </Link>
-          <Link to="/apps">Apps Service</Link>
-          <Link to="/maps">Maps Service</Link>
+          <Link
+            to="/second"
+            className={location.pathname === "/second" ? "active" : ""}>
+            Second Service
+          </Link>
+          <Link
+            to="/third"
+            className={location.pathname === "/third" ? "active" : ""}>
+            Third Service
+          </Link>
         </div>
       </div>
     </>
