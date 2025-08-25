@@ -48,6 +48,9 @@ module.exports = {
       exposes: {
         "./Auth": "./src/App.jsx",
       },
+      remotes: {
+        SecondModule: "Second@http://localhost:3003/remoteEntry.js",
+      },
       shared: {
         react: { singleton: true, eager: true },
         "react-dom": { singleton: true, eager: true },

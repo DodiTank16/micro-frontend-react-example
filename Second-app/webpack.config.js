@@ -43,7 +43,7 @@ module.exports = {
   plugins: [
     htmlPlugin,
     new ModuleFederationPlugin({
-      name: "Second",
+      name: "SecondModule",
       filename: "remoteEntry.js",
       exposes: {
         "./Second": "./src/App.jsx",

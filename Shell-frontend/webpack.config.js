@@ -46,7 +46,7 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {
         AuthModule: "AuthModule@http://localhost:3002/remoteEntry.js",
-        Second: "Second@http://localhost:3003/remoteEntry.js",
+        SecondModule: "Second@http://localhost:3003/remoteEntry.js",
       },
       shared: {
         react: { singleton: true, eager: true },
